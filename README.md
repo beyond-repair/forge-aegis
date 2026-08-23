@@ -1,15 +1,49 @@
-# forge-aegis (Project Nehemiah / AEGIS)
+<div align="center">
 
-**Status:** ACTIVE — Security line · **v0.1 vertical slice implemented**  
-**Governance:** [ADL-Governance](https://github.com/beyond-repair/ADL-Governance)
+# forge-aegis
 
-Offline integrity measurement: measure host files → compare to FLS baseline → deterministic result → audit record.
+### Project Nehemiah · AEGIS integrity engine
 
-## v0.1 pipeline
+**Measure · Prove · Decide** — offline host integrity without the malware guessing game
+
+[![Status](https://img.shields.io/badge/status-ACTIVE-22c55e?style=for-the-badge)](https://github.com/beyond-repair/forge-aegis)
+[![Slice](https://img.shields.io/badge/v0.1-vertical%20slice-0ea5e9?style=for-the-badge)](docs/V0_1_VERTICAL_SLICE.md)
+[![CI](https://img.shields.io/github/actions/workflow/status/beyond-repair/forge-aegis/ci.yml?style=for-the-badge&label=CI)](https://github.com/beyond-repair/forge-aegis/actions)
+[![Governance](https://img.shields.io/badge/ADL--Governance-7c3aed?style=for-the-badge)](https://github.com/beyond-repair/ADL-Governance)
+[![Python](https://img.shields.io/badge/Python-3.12-3776AB?style=for-the-badge&logo=python&logoColor=white)](python/aegis_pipeline.py)
+
+</div>
+
+---
+
+## Philosophy
+
+Traditional tools ask: *“Is this malicious?”*  
+**AEGIS asks:**
+
+> What changed? · Can I prove it? · Is it authorized? · Does the baseline still hold?
+
+---
+
+## v0.1 vertical slice
 
 ```text
-Host/Input → Evidence → FLS Policy → Validator → Structured Result → Audit
+  Host tree
+      │
+      ▼
+  Evidence (SHA-256 digests)
+      │
+      ▼
+  FLS policy (baseline)
+      │
+      ▼
+  Validator  →  PASS | FAIL | INCONCLUSIVE
+      │
+      ▼
+  Audit record (deterministic result_hash)
 ```
+
+**Invariant:** same host evidence + same policy → same `result_hash`.
 
 ```bash
 python python/aegis_pipeline.py \
@@ -18,25 +52,45 @@ python python/aegis_pipeline.py \
   --audit-dir ./aegis_audit
 ```
 
-See [docs/V0_1_VERTICAL_SLICE.md](docs/V0_1_VERTICAL_SLICE.md).
+Exit codes: `0` PASS · `2` FAIL · `3` INCONCLUSIVE
 
-## Tests
+---
+
+## Tests & release gate
 
 ```bash
 python python/tests/test_pipeline.py
 python python/tests/test_validator.py
 ```
 
-## Philosophy
+| Doc | Role |
+|-----|------|
+| [V0_1_VERTICAL_SLICE.md](docs/V0_1_VERTICAL_SLICE.md) | Contract |
+| [RELEASE_GATE_v0.1.md](docs/RELEASE_GATE_v0.1.md) | Tag checklist |
+| [THREAT_MODEL.md](docs/THREAT_MODEL.md) | Threat model |
 
-Not “is this malware?” — **what changed, can I prove it, is it authorized, does baseline hold?**
+**Operator tag:** `v0.1.0` when CI is green (implementation frozen until then).
 
-## Boundaries
+---
 
-- No network in the pipeline
-- No auto-restore in v0.1
-- Spec docs under `docs/`, `rfc/`, `fls/` remain normative for future expansion
+## Boundaries (v0.1)
 
-## License
+| Does | Does not |
+|------|----------|
+| Offline measurement & audit | Network fetch |
+| Deterministic PASS/FAIL | Auto-remediation |
+| Contract for Nehemiah | Live host agent (Nehemiah’s job) |
 
-See LICENSE.
+```text
+forge-aegis  ──contract──►  AEGIS-Nehemiah (live collection)
+```
+
+---
+
+<div align="center">
+
+**Atomic Dream Labs** · [ADL-Governance](https://github.com/beyond-repair/ADL-Governance)
+
+<sub>Integrity first. Spec docs under `docs/`, `rfc/`, `fls/` guide what comes next.</sub>
+
+</div>
