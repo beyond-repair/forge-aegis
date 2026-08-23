@@ -1,49 +1,31 @@
 <div align="center">
 
-# forge-aegis
+# 🛡️ forge-aegis
 
-### Project Nehemiah · AEGIS integrity engine
+## Stop asking “is it malware?”
+## Start asking **“what changed — and can I prove it?”**
 
-**Measure · Prove · Decide** — offline host integrity without the malware guessing game
+[![ACTIVE](https://img.shields.io/badge/●_ACTIVE-22c55e?style=for-the-badge)](https://github.com/beyond-repair/forge-aegis)
+[![v0.1](https://img.shields.io/badge/v0.1_SLICE-LIVE-0ea5e9?style=for-the-badge)](docs/V0_1_VERTICAL_SLICE.md)
+[![CI](https://img.shields.io/github/actions/workflow/status/beyond-repair/forge-aegis/ci.yml?style=for-the-badge)](https://github.com/beyond-repair/forge-aegis/actions)
 
-[![Status](https://img.shields.io/badge/status-ACTIVE-22c55e?style=for-the-badge)](https://github.com/beyond-repair/forge-aegis)
-[![Slice](https://img.shields.io/badge/v0.1-vertical%20slice-0ea5e9?style=for-the-badge)](docs/V0_1_VERTICAL_SLICE.md)
-[![CI](https://img.shields.io/github/actions/workflow/status/beyond-repair/forge-aegis/ci.yml?style=for-the-badge&label=CI)](https://github.com/beyond-repair/forge-aegis/actions)
-[![Governance](https://img.shields.io/badge/ADL--Governance-7c3aed?style=for-the-badge)](https://github.com/beyond-repair/ADL-Governance)
-[![Python](https://img.shields.io/badge/Python-3.12-3776AB?style=for-the-badge&logo=python&logoColor=white)](python/aegis_pipeline.py)
+**Deterministic. Offline. Auditable.**  
+Host state in → evidence → policy → **PASS / FAIL / INCONCLUSIVE** → hash-stable audit out.
 
 </div>
 
 ---
 
-## Philosophy
+## The pitch
 
-Traditional tools ask: *“Is this malicious?”*  
-**AEGIS asks:**
+Antivirus theater is a guessing game.  
+**forge-aegis** is a **measurement engine**:
 
-> What changed? · Can I prove it? · Is it authorized? · Does the baseline still hold?
+1. Hash what matters on disk  
+2. Compare to a baseline policy you control  
+3. Emit a result you can recompute tomorrow  
 
----
-
-## v0.1 vertical slice
-
-```text
-  Host tree
-      │
-      ▼
-  Evidence (SHA-256 digests)
-      │
-      ▼
-  FLS policy (baseline)
-      │
-      ▼
-  Validator  →  PASS | FAIL | INCONCLUSIVE
-      │
-      ▼
-  Audit record (deterministic result_hash)
-```
-
-**Invariant:** same host evidence + same policy → same `result_hash`.
+Same inputs → **same `result_hash`**. That's the product.
 
 ```bash
 python python/aegis_pipeline.py \
@@ -52,45 +34,28 @@ python python/aegis_pipeline.py \
   --audit-dir ./aegis_audit
 ```
 
-Exit codes: `0` PASS · `2` FAIL · `3` INCONCLUSIVE
-
----
-
-## Tests & release gate
-
-```bash
-python python/tests/test_pipeline.py
-python python/tests/test_validator.py
+```text
+Host → Evidence → FLS policy → Validator → Audit record
 ```
 
-| Doc | Role |
-|-----|------|
-| [V0_1_VERTICAL_SLICE.md](docs/V0_1_VERTICAL_SLICE.md) | Contract |
-| [RELEASE_GATE_v0.1.md](docs/RELEASE_GATE_v0.1.md) | Tag checklist |
-| [THREAT_MODEL.md](docs/THREAT_MODEL.md) | Threat model |
-
-**Operator tag:** `v0.1.0` when CI is green (implementation frozen until then).
-
 ---
 
-## Boundaries (v0.1)
-
-| Does | Does not |
-|------|----------|
-| Offline measurement & audit | Network fetch |
-| Deterministic PASS/FAIL | Auto-remediation |
-| Contract for Nehemiah | Live host agent (Nehemiah’s job) |
+## Built for Nehemiah — not instead of it
 
 ```text
-forge-aegis  ──contract──►  AEGIS-Nehemiah (live collection)
+forge-aegis     = contract authority (this repo)
+AEGIS-Nehemiah  = live host collection (consumes the contract)
 ```
+
+No network in the pipeline. No auto-wipe fantasy in v0.1.  
+Just a vertical slice you can **trust enough to integrate against**.
 
 ---
 
 <div align="center">
 
-**Atomic Dream Labs** · [ADL-Governance](https://github.com/beyond-repair/ADL-Governance)
+### ⭐ Integrity without theater. Star it if you're done with black boxes.
 
-<sub>Integrity first. Spec docs under `docs/`, `rfc/`, `fls/` guide what comes next.</sub>
+[Atomic Dream Labs](https://github.com/beyond-repair) · [Release gate](docs/RELEASE_GATE_v0.1.md)
 
 </div>
