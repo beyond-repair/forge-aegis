@@ -24,27 +24,28 @@ jobs:
       - name: CLI smoke (PASS path)
         run: |
           set -e
-          TMP=$(mktemp -d)
+          export TMP=$(mktemp -d)
           mkdir -p "$TMP/host"
           echo alpha > "$TMP/host/a.txt"
           echo beta > "$TMP/host/b.txt"
-          # Build policy from live digests so PASS is deterministic
           python - <<'PY'
-          import hashlib, json, os, pathlib, sys
+          import hashlib, json, os, pathlib
           host = pathlib.Path(os.environ["TMP"]) / "host"
           arts = []
           for p in sorted(host.rglob("*")):
               if p.is_file():
                   dig = hashlib.sha256(p.read_bytes()).hexdigest()
-                  arts.append({"id": str(p.relative_to(host)).replace("\\", "/"), "kind": "file", "digest": dig})
+                  arts.append({
+                      "id": str(p.relative_to(host)).replace("\\", "/"),
+                      "kind": "file",
+                      "digest": dig,
+                  })
           policy = {"schema": "aegis.fls.v0.1", "baseline_id": "ci", "artifacts": arts}
           (pathlib.Path(os.environ["TMP"]) / "policy.json").write_text(json.dumps(policy))
           print("policy written", len(arts))
           PY
           python python/aegis_pipeline.py --host "$TMP/host" --policy "$TMP/policy.json" --audit-dir "$TMP/audit"
           test -d "$TMP/audit"
-        env:
-          TMP: ${{ runner.temp }}/aegis_ci
 
       - name: CLI smoke (FAIL / tamper)
         run: |
