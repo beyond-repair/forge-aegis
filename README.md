@@ -1,75 +1,42 @@
-# Project Nehemiah: AEGIS
+# forge-aegis (Project Nehemiah / AEGIS)
 
-> **Repository Status**: Initialized as specification-first repository (FLS-0 Draft Baseline).  
-> See [docs/REPOSITORY.md](docs/REPOSITORY.md) for layout, branching model, and change process.  
-> Normative changes require an approved RFC (see `rfc/RFC-TEMPLATE.md` and GOVERNANCE.md).
+**Status:** ACTIVE — Security line · **v0.1 vertical slice implemented**  
+**Governance:** [ADL-Governance](https://github.com/beyond-repair/ADL-Governance)
 
-## Overview
+Offline integrity measurement: measure host files → compare to FLS baseline → deterministic result → audit record.
 
-**Project Nehemiah** is a high-assurance integrity ecosystem designed to move beyond traditional reactive malware detection. By shifting the paradigm from *detecting malice* to *measuring integrity*, the platform provides a mathematically verifiable, evidence-backed framework for endpoint state management.
+## v0.1 pipeline
 
-The system is powered by **Forge**, a domain-agnostic engineering platform, and implemented through **AEGIS** (*Adaptive Endpoint Guardian & Integrity System*), a specialized domain package that defines the ontology of a trusted computing environment.
+```text
+Host/Input → Evidence → FLS Policy → Validator → Structured Result → Audit
+```
 
----
+```bash
+python python/aegis_pipeline.py \
+  --host ./my_host_tree \
+  --policy examples/policy_example.json \
+  --audit-dir ./aegis_audit
+```
 
-## The Architecture
+See [docs/V0_1_VERTICAL_SLICE.md](docs/V0_1_VERTICAL_SLICE.md).
 
-Nehemiah operates as an integrated state machine anchored by the **Graph**—the canonical data model for all system components and their relationships.
+## Tests
 
-### The Foundational Subsystems
+```bash
+python python/tests/test_pipeline.py
+python python/tests/test_validator.py
+```
 
-1. **Truth**: The raw acquisition layer; measures reality.
-2. **Graph**: The canonical data model; represents reality as a verifiable state.
-3. **Watchman**: Observes changes and anomalies against the established baseline.
-4. **Wisdom**: Correlates observations to identify patterns and systemic context.
-5. **Discernment**: Explains findings; provides evidence-based attribution.
-6. **Memory**: Preserves state; maintains historical provenance and audit trails.
-7. **Restoration**: Repairs state; executes minimal, evidence-backed rollbacks.
-8. **Stewardship**: Schedules policy enforcement and lifecycle management.
+## Philosophy
 
----
+Not “is this malware?” — **what changed, can I prove it, is it authorized, does baseline hold?**
 
-## Forge: The Engineering Platform
+## Boundaries
 
-**Forge** serves as the meta-engineering framework, providing the tools to define, verify, and generate the system. It is strictly decoupled from platform-specific internals (drivers, registries, etc.), focusing instead on:
+- No network in the pipeline
+- No auto-restore in v0.1
+- Spec docs under `docs/`, `rfc/`, `fls/` remain normative for future expansion
 
-* **Specifications**: Formal schemas for system artifacts.
-* **Verification**: Proving conformance between actual state and defined baseline.
-* **Generation**: Automated deployment of verifiable integrity policies.
-* **Transformations**: Managing state changes within the Graph.
+## License
 
----
-
-## AEGIS: The Domain Implementation
-
-**AEGIS** is the first implementation of the Forge ontology. It specializes generic artifacts into domain-specific nodes and edges, including:
-
-* **Hardware/Firmware**: `FirmwareArtifact`, `DriverArtifact`
-* **System/Registry**: `RegistryArtifact`, `ServiceArtifact`, `ProcessArtifact`
-* **Policy/Evidence**: `PolicyArtifact`, `ACLArtifact`, `IncidentArtifact`, `RollbackArtifact`
-
----
-
-## Philosophy: Integrity-First
-
-Traditional security asks: *"Is this malicious?"*
-**Nehemiah asks:**
-
-* *What changed?*
-* *Can I prove the change?*
-* *Is it authorized?*
-* *Does it preserve the trusted baseline?*
-
-If a change cannot be justified or proven against the trusted baseline, the system treats it as an integrity violation, enabling precise restoration to the last known good state.
-
----
-
-## Implementation Status
-
-* **Forge Platform**: Core ontology and meta-framework finalized.
-* **AEGIS Ontology**: Defining domain-specific artifacts for endpoint integrity.
-* **Subsystem Integration**: Currently aligning the eight foundational pillars with the Graph-based canonical model.
-
----
-
-*This project is built on the principle of sovereign, verifiable system integrity. Architecture developed by William Brian Ware.*
+See LICENSE.
