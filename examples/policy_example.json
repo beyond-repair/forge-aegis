@@ -1,0 +1,12 @@
+{
+  "schema": "aegis.fls.v0.1",
+  "baseline_id": "example-baseline-001",
+  "strict_inventory": false,
+  "artifacts": [
+    {
+      "id": "config/app.conf",
+      "kind": "file",
+      "digest": "REPLACE_WITH_SHA256_OF_FILE"
+    }
+  ]
+}
