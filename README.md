@@ -2,30 +2,61 @@
 
 # 🛡️ forge-aegis
 
-## Stop asking “is it malware?”
-## Start asking **“what changed — and can I prove it?”**
+### Deterministic **integrity measurement** — offline contract for Nehemiah
 
 [![ACTIVE](https://img.shields.io/badge/●_ACTIVE-22c55e?style=for-the-badge)](https://github.com/beyond-repair/forge-aegis)
-[![v0.1](https://img.shields.io/badge/v0.1_SLICE-LIVE-0ea5e9?style=for-the-badge)](docs/V0_1_VERTICAL_SLICE.md)
+[![v0.1](https://img.shields.io/badge/v0.1_SLICE-0ea5e9?style=for-the-badge)](docs/V0_1_VERTICAL_SLICE.md)
 [![CI](https://img.shields.io/github/actions/workflow/status/beyond-repair/forge-aegis/ci.yml?style=for-the-badge)](https://github.com/beyond-repair/forge-aegis/actions)
-
-**Deterministic. Offline. Auditable.**  
-Host state in → evidence → policy → **PASS / FAIL / INCONCLUSIVE** → hash-stable audit out.
 
 </div>
 
 ---
 
-## The pitch
+## Why it is unique
 
-Antivirus theater is a guessing game.  
-**forge-aegis** is a **measurement engine**:
+Not a malware oracle. A **reproducible measurement engine**: same host tree + same policy → same `result_hash`. No network. No silent “AI said so.”
 
-1. Hash what matters on disk  
-2. Compare to a baseline policy you control  
-3. Emit a result you can recompute tomorrow  
+---
 
-Same inputs → **same `result_hash`**. That's the product.
+## Visual workflow
+
+```text
+  ┌─────────────┐
+  │ 1. HOST     │  files / tree you point at
+  └──────┬──────┘
+         ▼
+  ┌─────────────┐
+  │ 2. EVIDENCE │  digests (SHA-256) of selected paths
+  └──────┬──────┘
+         ▼
+  ┌─────────────┐
+  │ 3. POLICY   │  FLS baseline — what “good” means
+  └──────┬──────┘
+         ▼
+  ┌─────────────┐
+  │ 4. VALIDATE │  compare evidence ↔ baseline
+  └──────┬──────┘
+         ▼
+  ┌─────────────────────────────────────┐
+  │ 5. RESULT  PASS | FAIL | INCONCLUSIVE │
+  │    + deterministic result_hash        │
+  └──────┬──────────────────────────────┘
+         ▼
+  ┌─────────────┐
+  │ 6. AUDIT    │  written record you can recompute later
+  └─────────────┘
+```
+
+### Step-by-step — how & why
+
+| Step | How | Why |
+|-----:|-----|-----|
+| **1** | Point at a local host directory | Reality input — not a cloud feed |
+| **2** | Hash artifacts into evidence | Tamper-evident snapshot |
+| **3** | Load policy JSON (baseline) | You define “known good” |
+| **4** | Deterministic compare | Same inputs → same verdict |
+| **5** | Exit 0 / 2 / 3 | Machine-readable, CI-friendly |
+| **6** | Write audit dir | Provenance without a SaaS SIEM |
 
 ```bash
 python python/aegis_pipeline.py \
@@ -34,28 +65,24 @@ python python/aegis_pipeline.py \
   --audit-dir ./aegis_audit
 ```
 
-```text
-Host → Evidence → FLS policy → Validator → Audit record
-```
-
 ---
 
-## Built for Nehemiah — not instead of it
+## How it works with the lab
 
 ```text
-forge-aegis     = contract authority (this repo)
-AEGIS-Nehemiah  = live host collection (consumes the contract)
-```
+forge-aegis  ══contract authority══►  AEGIS-Project-Nehemiah-
+     │                                    (live collection)
+     │
+     └── offline CLI / CI only in v0.1
 
-No network in the pipeline. No auto-wipe fantasy in v0.1.  
-Just a vertical slice you can **trust enough to integrate against**.
+Clean-Room may attest workspace integrity separately (JKillnHide).
+BlockSwarm does not depend on this path.
+```
 
 ---
 
 <div align="center">
 
-### ⭐ Integrity without theater. Star it if you're done with black boxes.
-
-[Atomic Dream Labs](https://github.com/beyond-repair) · [Release gate](docs/RELEASE_GATE_v0.1.md)
+[Release gate](docs/RELEASE_GATE_v0.1.md) · [Atomic Dream Labs](https://github.com/beyond-repair)
 
 </div>
