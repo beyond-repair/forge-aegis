@@ -1,24 +1,63 @@
 <div align="center">
 
-# 🛡️ forge-aegis
+```
+╔══════════════════════════════════════════════════════════════╗
+║                                                              ║
+║   ███████╗ ██████╗ ██████╗  ██████╗ ███████╗                 ║
+║   ██╔════╝██╔═══██╗██╔══██╗██╔════╝ ██╔════╝                 ║
+║   █████╗  ██║   ██║██████╔╝██║  ███╗█████╗                   ║
+║   ██╔══╝  ██║   ██║██╔══██╗██║   ██║██╔══╝                   ║
+║   ██║     ╚██████╔╝██║  ██║╚██████╔╝███████╗                 ║
+║   ╚═╝      ╚═════╝ ╚═╝  ╚═╝ ╚═════╝ ╚══════╝                 ║
+║                                                              ║
+║              ＡＥＧＩＳ  ·  ＮＥＨＥＭＩＡＨ                   ║
+╚══════════════════════════════════════════════════════════════╝
+```
 
-### Deterministic **integrity measurement** — offline contract for Nehemiah
+# FORGE-AEGIS
 
-[![ACTIVE](https://img.shields.io/badge/●_ACTIVE-22c55e?style=for-the-badge)](https://github.com/beyond-repair/forge-aegis)
-[![v0.1](https://img.shields.io/badge/v0.1_SLICE-0ea5e9?style=for-the-badge)](docs/V0_1_VERTICAL_SLICE.md)
-[![CI](https://img.shields.io/github/actions/workflow/status/beyond-repair/forge-aegis/ci.yml?style=for-the-badge)](https://github.com/beyond-repair/forge-aegis/actions)
+### Deterministic **integrity measurement** — offline contract for Project Nehemiah
+
+**THE CITY WRITES ITS OWN REALITY.**  
+**YOU JUST VERIFY IT.**
+
+[![ACTIVE](https://img.shields.io/badge/●_ACTIVE-a855f7?style=for-the-badge&labelColor=0f0f23)](https://github.com/beyond-repair/forge-aegis)
+[![v0.1 SLICE](https://img.shields.io/badge/v0.1_VERTICAL_SLICE-22d3ee?style=for-the-badge&labelColor=0f0f23)](docs/V0_1_VERTICAL_SLICE.md)
+[![CI](https://img.shields.io/github/actions/workflow/status/beyond-repair/forge-aegis/ci.yml?style=for-the-badge&labelColor=0f0f23)](https://github.com/beyond-repair/forge-aegis/actions)
+[![Offline](https://img.shields.io/badge/network__access-FALSE-ef4444?style=for-the-badge&labelColor=0f0f23)](#)
+
+```
+STABILITY  ████████████████████████  100%
+ALERT      ░░░░░░░░░░░░░░░░░░░░░░░░   0%
+```
 
 </div>
 
 ---
 
-## Why it is unique
+## ▌ MAIN OBJECTIVE
 
-Not a malware oracle. A **reproducible measurement engine**: same host tree + same policy → same `result_hash`. No network. No silent “AI said so.”
+**REACH THE CORE TOWER** — Prove host integrity without a cloud oracle.  
+Same host tree + same policy → same `result_hash`. Always.
+
+| Status | Item |
+|:------:|------|
+| ☑ | Deterministic evidence pipeline |
+| ☑ | FLS baseline policy |
+| ☑ | PASS / FAIL / INCONCLUSIVE exits |
+| ☑ | Audit directory with recomputable hash |
+| ☑ | CI green |
 
 ---
 
-## Visual workflow
+## ▌ WHY THIS SURFACE EXISTS
+
+Not a malware oracle. A **reproducible measurement engine**.  
+No network. No silent “AI said so.” No vendor in the path.
+
+---
+
+## ▌ VISUAL WORKFLOW — VERSION FORK
 
 ```text
   ┌─────────────┐
@@ -47,7 +86,7 @@ Not a malware oracle. A **reproducible measurement engine**: same host tree + sa
   └─────────────┘
 ```
 
-### Step-by-step — how & why
+### Step-by-step
 
 | Step | How | Why |
 |-----:|-----|-----|
@@ -67,7 +106,19 @@ python python/aegis_pipeline.py \
 
 ---
 
-## How it works with the lab
+## ▌ TOOLS
+
+| # | Tool | Function |
+|:-:|------|----------|
+| 1 | **SCAN** | Measure host tree → evidence digests |
+| 2 | **FORK** | Parallel policy evaluations |
+| 3 | **SPIKE** | Inject new baseline rule |
+| 4 | **ANCHOR** | Lock result_hash for audit |
+| 5 | **ESCAPE** | Fail-closed on policy violation |
+
+---
+
+## ▌ HOW IT FITS THE LAB
 
 ```text
 forge-aegis  ══contract authority══►  AEGIS-Project-Nehemiah-
@@ -82,6 +133,15 @@ BlockSwarm does not depend on this path.
 ---
 
 <div align="center">
+
+```
+YOU WERE HERE BEFORE.
+VERSION 17 FAILED.
+DO NOT TRUST SABLE.
+THE CITY REMEMBERS.
+```
+
+**REWRITE · BUILD · TRANSCEND**
 
 [Release gate](docs/RELEASE_GATE_v0.1.md) · [Atomic Dream Labs](https://github.com/beyond-repair)
 
