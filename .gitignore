@@ -24,3 +24,9 @@ build/
 tmp/
 *.tmp
 *.bak
+
+# Local installs and pipeline output
+.venv/
+*.egg-info/
+.pytest_cache/
+aegis_audit/

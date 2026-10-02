@@ -1,0 +1,23 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "forge-aegis"
+version = "0.1.0"
+description = "Offline v0.1 reference pipeline: hash a directory, compare it to an FLS baseline policy, write an audit record."
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "License TBD" }
+dependencies = []
+
+[project.scripts]
+forge-aegis = "aegis_pipeline:main"
+
+[tool.setuptools]
+package-dir = {"" = "python"}
+py-modules = ["aegis_pipeline", "aegis_validator"]
+
+[tool.pytest.ini_options]
+pythonpath = ["python"]
+testpaths = ["python/tests"]

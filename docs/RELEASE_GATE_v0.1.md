@@ -16,12 +16,12 @@ Tag only when every box is checked.
 ## Hardening
 
 - [ ] GitHub Actions CI green on `main`
-- [ ] README matches v0.1 scope (offline validation engine, not full host platform)
-- [ ] `docs/V0_1_VERTICAL_SLICE.md` matches code
-- [ ] Example policy path documented
-- [ ] No network dependency in pipeline
-- [ ] No auto-remediation code paths
-- [ ] No unsupported security marketing claims
+- [x] README matches v0.1 scope (offline validation engine, not full host platform)
+- [x] `docs/V0_1_VERTICAL_SLICE.md` matches code
+- [x] Example policy path documented
+- [x] No network dependency in pipeline
+- [x] No auto-remediation code paths
+- [x] No unsupported security marketing claims
 
 ## Operator release
 
