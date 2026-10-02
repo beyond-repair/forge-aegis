@@ -24,7 +24,14 @@ def test_missing():
     assert not ok and errs
 
 
+def _run_all() -> int:
+    tests = [test_ok, test_missing]
+    for fn in tests:
+        fn()
+        print(f"PASS {fn.__name__}")
+    print(f"{len(tests)} passed")
+    return 0
+
+
 if __name__ == "__main__":
-    test_ok()
-    test_missing()
-    print("ok")
+    raise SystemExit(_run_all())

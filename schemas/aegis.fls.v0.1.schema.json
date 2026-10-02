@@ -1,0 +1,26 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "aegis.fls.v0.1",
+  "title": "forge-aegis v0.1 baseline policy",
+  "description": "Reference schema for the Python v0.1 slice. Not a generated full FLS schema. The pipeline does not fetch this file.",
+  "type": "object",
+  "additionalProperties": true,
+  "required": ["schema", "baseline_id", "artifacts"],
+  "properties": {
+    "schema": { "type": "string", "const": "aegis.fls.v0.1" },
+    "baseline_id": { "type": "string", "minLength": 1 },
+    "strict_inventory": { "type": "boolean" },
+    "artifacts": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "kind", "digest"],
+        "properties": {
+          "id": { "type": "string", "minLength": 1 },
+          "kind": { "type": "string" },
+          "digest": { "type": "string", "pattern": "^[0-9a-fA-F]{64}$" }
+        }
+      }
+    }
+  }
+}
