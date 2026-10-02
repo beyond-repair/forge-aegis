@@ -19,15 +19,14 @@ NOT CLAIMED full Nehemiah host · kernel agents · remote attestation · auto-re
 
 ## Install
 
-From a clone of this repository (use a venv on PEP 668 / externally-managed systems):
+From a clone of this repository. Use `python3` (a `python` command is not required). Prefer a venv on PEP 668 / externally-managed systems:
 
 ```bash
 python3 -m venv .venv
-source .venv/bin/activate
-python3 -m pip install -e .
+.venv/bin/python -m pip install -e .
 ```
 
-That installs the `forge-aegis` command. You can skip the install and call the module directly, as the examples below do.
+That installs `.venv/bin/forge-aegis`. You can skip the install and call the module with `python3`, as the examples below do.
 
 ## Configure
 
@@ -53,7 +52,7 @@ python3 python/aegis_pipeline.py \
   --audit-dir ./aegis_audit
 ```
 
-After install, the same flags work as `forge-aegis`.
+After install, the same flags work as `.venv/bin/forge-aegis`.
 
 Exit codes: `0` PASS, `2` FAIL or a missing host/policy path, `3` INCONCLUSIVE (malformed policy).
 
@@ -76,7 +75,7 @@ python3 python/tests/test_validator.py
 python3 python/tests/test_pipeline.py
 ```
 
-`test_validator.py` prints `2 passed`. `test_pipeline.py` prints `8 passed`. If pytest is installed, `python3 -m pytest -q` collects the same tests (`pythonpath` is set in `pyproject.toml`).
+`test_validator.py` prints `2 passed`. `test_pipeline.py` prints `8 passed`. If pytest is installed in that environment, `.venv/bin/python -m pytest -q` collects the same tests (`pythonpath` is set in `pyproject.toml`).
 
 ## What v0.1 does not do
 
