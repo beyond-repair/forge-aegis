@@ -2,9 +2,15 @@
 
 Offline reference pipeline for the Forge Language Specification (FLS) / AEGIS v0.1 vertical slice (Project Nehemiah).
 
+**Claim level:** software / **RUNNABLE SKETCH** — not a complete host integrity product, not a kernel agent, and not a Forge language compiler. Documents under `fls/` are draft specification. The runnable product is the Python slice below.
+
 Given a directory and a baseline policy, it hashes the files, compares digests, and writes an audit record. The same file bytes and the same policy produce the same `result_hash` on any path. It does not use the network, does not execute host files, and does not change the host.
 
-This is **not** a full endpoint agent, a Forge language compiler, or a Nehemiah host. Documents under `fls/` are draft specification. The runnable product is the Python slice below.
+```
+LIFECYCLE   ACTIVE
+CLAIM       software
+NOT CLAIMED full Nehemiah host · kernel agents · remote attestation · auto-remediation
+```
 
 ## Requirements
 
