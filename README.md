@@ -2,9 +2,15 @@
 
 Offline reference pipeline for the Forge Language Specification (FLS) / AEGIS v0.1 vertical slice (Project Nehemiah).
 
+**Claim level:** software / **RUNNABLE SKETCH** — not a complete host integrity product, not a kernel agent, and not a Forge language compiler. Documents under `fls/` are draft specification. The runnable product is the Python slice below.
+
 Given a directory and a baseline policy, it hashes the files, compares digests, and writes an audit record. The same file bytes and the same policy produce the same `result_hash` on any path. It does not use the network, does not execute host files, and does not change the host.
 
-This is **not** a full endpoint agent, a Forge language compiler, or a Nehemiah host. Documents under `fls/` are draft specification. The runnable product is the Python slice below.
+```
+LIFECYCLE   ACTIVE
+CLAIM       software
+NOT CLAIMED full Nehemiah host · kernel agents · remote attestation · auto-remediation
+```
 
 ## Requirements
 
@@ -13,10 +19,12 @@ This is **not** a full endpoint agent, a Forge language compiler, or a Nehemiah 
 
 ## Install
 
-From a clone of this repository:
+From a clone of this repository (use a venv on PEP 668 / externally-managed systems):
 
 ```bash
-python -m pip install -e .
+python3 -m venv .venv
+source .venv/bin/activate
+python3 -m pip install -e .
 ```
 
 That installs the `forge-aegis` command. You can skip the install and call the module directly, as the examples below do.
@@ -26,7 +34,7 @@ That installs the `forge-aegis` command. You can skip the install and call the m
 Baseline a directory you already trust. This writes policy JSON; it does not modify the directory.
 
 ```bash
-python python/aegis_pipeline.py \
+python3 python/aegis_pipeline.py \
   --host examples/demo_host \
   --emit-policy ./baseline.json \
   --baseline-id demo-001
@@ -39,7 +47,7 @@ Add `--strict-inventory` if extra files should fail closed later. Artifact ids a
 ## Run
 
 ```bash
-python python/aegis_pipeline.py \
+python3 python/aegis_pipeline.py \
   --host examples/demo_host \
   --policy examples/policy_example.json \
   --audit-dir ./aegis_audit
@@ -58,17 +66,17 @@ Limit measurement to named files with repeatable `--only RELATIVE/PATH`.
 Check a graph document's required keys without measuring a tree:
 
 ```bash
-python python/aegis_validator.py examples/policy_example.json
+python3 python/aegis_validator.py examples/policy_example.json
 ```
 
 ## Test
 
 ```bash
-python python/tests/test_validator.py
-python python/tests/test_pipeline.py
+python3 python/tests/test_validator.py
+python3 python/tests/test_pipeline.py
 ```
 
-`test_validator.py` prints `2 passed`. `test_pipeline.py` prints `8 passed`. If pytest is installed, `pytest -q` collects the same tests (`pythonpath` is set in `pyproject.toml`).
+`test_validator.py` prints `2 passed`. `test_pipeline.py` prints `8 passed`. If pytest is installed, `python3 -m pytest -q` collects the same tests (`pythonpath` is set in `pyproject.toml`).
 
 ## What v0.1 does not do
 

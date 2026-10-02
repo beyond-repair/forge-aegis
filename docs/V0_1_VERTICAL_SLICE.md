@@ -33,8 +33,8 @@ Configuring a baseline is separate: `--emit-policy` writes a policy from a trust
 ## CLI
 
 ```bash
-python python/aegis_pipeline.py --host examples/demo_host --emit-policy ./baseline.json --baseline-id demo-001
-python python/aegis_pipeline.py --host examples/demo_host --policy examples/policy_example.json --audit-dir ./aegis_audit
+python3 python/aegis_pipeline.py --host examples/demo_host --emit-policy ./baseline.json --baseline-id demo-001
+python3 python/aegis_pipeline.py --host examples/demo_host --policy examples/policy_example.json --audit-dir ./aegis_audit
 ```
 
 Exit codes: `0` PASS · `2` FAIL (or missing path) · `3` INCONCLUSIVE
@@ -42,8 +42,8 @@ Exit codes: `0` PASS · `2` FAIL (or missing path) · `3` INCONCLUSIVE
 ## Tests
 
 ```bash
-python python/tests/test_validator.py
-python python/tests/test_pipeline.py
+python3 python/tests/test_validator.py
+python3 python/tests/test_pipeline.py
 ```
 
 ## Explicitly out of scope for v0.1
