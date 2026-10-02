@@ -13,20 +13,21 @@ This is **not** a full endpoint agent, a Forge language compiler, or a Nehemiah 
 
 ## Install
 
-From a clone of this repository:
+From a clone of this repository. Use `python3` (a `python` command is not required):
 
 ```bash
-python -m pip install -e .
+python3 -m venv .venv
+.venv/bin/python -m pip install -e .
 ```
 
-That installs the `forge-aegis` command. You can skip the install and call the module directly, as the examples below do.
+That installs `.venv/bin/forge-aegis`. You can skip the install and call the module with `python3`, as the examples below do.
 
 ## Configure
 
 Baseline a directory you already trust. This writes policy JSON; it does not modify the directory.
 
 ```bash
-python python/aegis_pipeline.py \
+python3 python/aegis_pipeline.py \
   --host examples/demo_host \
   --emit-policy ./baseline.json \
   --baseline-id demo-001
@@ -39,13 +40,13 @@ Add `--strict-inventory` if extra files should fail closed later. Artifact ids a
 ## Run
 
 ```bash
-python python/aegis_pipeline.py \
+python3 python/aegis_pipeline.py \
   --host examples/demo_host \
   --policy examples/policy_example.json \
   --audit-dir ./aegis_audit
 ```
 
-After install, the same flags work as `forge-aegis`.
+After install, the same flags work as `.venv/bin/forge-aegis`.
 
 Exit codes: `0` PASS, `2` FAIL or a missing host/policy path, `3` INCONCLUSIVE (malformed policy).
 
@@ -58,17 +59,17 @@ Limit measurement to named files with repeatable `--only RELATIVE/PATH`.
 Check a graph document's required keys without measuring a tree:
 
 ```bash
-python python/aegis_validator.py examples/policy_example.json
+python3 python/aegis_validator.py examples/policy_example.json
 ```
 
 ## Test
 
 ```bash
-python python/tests/test_validator.py
-python python/tests/test_pipeline.py
+python3 python/tests/test_validator.py
+python3 python/tests/test_pipeline.py
 ```
 
-`test_validator.py` prints `2 passed`. `test_pipeline.py` prints `8 passed`. If pytest is installed, `pytest -q` collects the same tests (`pythonpath` is set in `pyproject.toml`).
+`test_validator.py` prints `2 passed`. `test_pipeline.py` prints `8 passed`. If pytest is installed in that environment, `python3 -m pytest -q` collects the same tests (`pythonpath` is set in `pyproject.toml`).
 
 ## What v0.1 does not do
 
