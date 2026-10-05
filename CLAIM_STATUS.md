@@ -24,7 +24,7 @@
 ## Evidence this sweep
 
 - Local: `python3 python/tests/test_validator.py` (2 passed); `python3 python/tests/test_pipeline.py` (8 passed).
-- Remote CI: workflow `forge-aegis CI` run 37065566958 success on pre-head `590ba108`. Post-push CI must be re-checked.
+- Remote CI: workflow `forge-aegis CI` run 37065566958 success on pre-head `590ba108`. Post-push run 37257747973 success on `8083425d` (job test 111598348161; unit tests and CLI PASS/FAIL smokes success). Observed Sweep-222. Not a claim elevation.
 - Dependabot open alerts: 0 at selection time.
 - Releases API: empty. Tags API: empty. No tag created this sweep.
 
